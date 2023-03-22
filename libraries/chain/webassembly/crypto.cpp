@@ -249,23 +249,23 @@ namespace eosio { namespace chain { namespace webassembly {
 
    void interface::bls_g1_add(span<const char> op1, span<const char> op2, span<char> result) const
    {
-       bls12_381::g1 a = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op1.data()), 144});
-       bls12_381::g1 b = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op2.data()), 144});
+       bls12_381::g1 a = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op1.data()), 144}, false, true);
+       bls12_381::g1 b = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op2.data()), 144}, false, true);
        bls12_381::g1 c = a.add(b);
-       c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 144});
+       c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 144}, true);
    }
 
    void interface::bls_g2_add(span<const char> op1, span<const char> op2, span<char> result) const
    {
-       bls12_381::g2 a = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op1.data()), 288});
-       bls12_381::g2 b = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op2.data()), 288});
+       bls12_381::g2 a = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op1.data()), 288}, false, true);
+       bls12_381::g2 b = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op2.data()), 288}, false, true);
        bls12_381::g2 c = a.add(b);
-       c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 288});
+       c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 288}, true);
    }
 
    void interface::bls_g1_mul(span<const char> op1, span<const char> op2, span<char> result) const
    {
-       bls12_381::g1 a = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op1.data()), 144});
+       bls12_381::g1 a = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op1.data()), 144}, false, true);
        std::array<uint64_t, 4> b = bls12_381::scalar::fromBytesLE<4>({reinterpret_cast<const uint8_t*>(op2.data()), 32});
        bls12_381::g1 c = a.mulScalar(b);
        c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 144});
@@ -273,10 +273,10 @@ namespace eosio { namespace chain { namespace webassembly {
 
    void interface::bls_g2_mul(span<const char> op1, span<const char> op2, span<char> result) const
    {
-       bls12_381::g2 a = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op1.data()), 288});
+       bls12_381::g2 a = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(op1.data()), 288}, false, true);
        std::array<uint64_t, 4> b = bls12_381::scalar::fromBytesLE<4>({reinterpret_cast<const uint8_t*>(op2.data()), 32});
        bls12_381::g2 c = a.mulScalar(b);
-       c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 288});
+       c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 288}, true);
    }
 
    void interface::bls_g1_exp(span<const char> points, span<const char> scalars, const uint32_t n, span<char> result) const
@@ -287,13 +287,13 @@ namespace eosio { namespace chain { namespace webassembly {
        sv.reserve(n);
        for(uint32_t i = 0; i < n; i++)
        {
-           bls12_381::g1 p = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(points.data() + n*144), 144});
+           bls12_381::g1 p = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(points.data() + n*144), 144}, false, true);
            std::array<uint64_t, 4> s = bls12_381::scalar::fromBytesLE<4>({reinterpret_cast<const uint8_t*>(scalars.data() + n*32), 32});
            pv.push_back(p);
            sv.push_back(s);
        }
        bls12_381::g1 r = bls12_381::g1::multiExp(pv, sv);
-       r.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 144});
+       r.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 144}, true);
    }
 
    void interface::bls_g2_exp(span<const char> points, span<const char> scalars, const uint32_t n, span<char> result) const
@@ -304,13 +304,13 @@ namespace eosio { namespace chain { namespace webassembly {
        sv.reserve(n);
        for(uint32_t i = 0; i < n; i++)
        {
-           bls12_381::g2 p = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(points.data() + n*288), 288});
+           bls12_381::g2 p = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(points.data() + n*288), 288}, false, true);
            std::array<uint64_t, 4> s = bls12_381::scalar::fromBytesLE<4>({reinterpret_cast<const uint8_t*>(scalars.data() + n*32), 32});
            pv.push_back(p);
            sv.push_back(s);
        }
        bls12_381::g2 r = bls12_381::g2::multiExp(pv, sv);
-       r.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 288});
+       r.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 288}, true);
    }
 
    void interface::bls_pairing(span<const char> g1_points, span<const char> g2_points, const uint32_t n, span<char> result) const
@@ -319,12 +319,12 @@ namespace eosio { namespace chain { namespace webassembly {
        v.reserve(n);
        for(uint32_t i = 0; i < n; i++)
        {
-           bls12_381::g1 p_g1 = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(g1_points.data() + n*144), 144});
-           bls12_381::g2 p_g2 = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(g2_points.data() + n*288), 288});
+           bls12_381::g1 p_g1 = bls12_381::g1::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(g1_points.data() + n*144), 144}, false, true);
+           bls12_381::g2 p_g2 = bls12_381::g2::fromJacobianBytesLE({reinterpret_cast<const uint8_t*>(g2_points.data() + n*288), 288}, false, true);
            bls12_381::pairing::add_pair(v, p_g1, p_g2);
        }
        bls12_381::fp12 r = bls12_381::pairing::calculate(v);
-       r.toBytesLE({reinterpret_cast<uint8_t*>(result.data()), 576});
+       r.toBytesLE({reinterpret_cast<uint8_t*>(result.data()), 576}, true);
    }
 
 }}} // ns eosio::chain::webassembly

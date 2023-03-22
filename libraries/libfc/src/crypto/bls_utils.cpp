@@ -6,61 +6,61 @@ namespace fc {
 
   void to_variant(const bls12_381::g1& var, fc::variant& vo, const fc::yield_function_t& yield)
   {
-      vo = bytesToHex<144>(var.toJacobianBytesBE());
+      vo = bytesToHex<144>(var.toJacobianBytesLE(true));
   }
 
   void from_variant(const fc::variant& var, bls12_381::g1& vo)
   {
-      vo = g1::fromJacobianBytesBE(hexToBytes(var.as_string()));
+      vo = g1::fromJacobianBytesLE(hexToBytes(var.as_string()), false, true);
   }
 
   void to_variant(const bls12_381::g2& var, fc::variant& vo, const fc::yield_function_t& yield)
   {
-      vo = bytesToHex<288>(var.toJacobianBytesBE());
+      vo = bytesToHex<288>(var.toJacobianBytesLE(true));
   }
 
   void from_variant(const fc::variant& var, bls12_381::g2& vo)
   {
-      vo = g2::fromJacobianBytesBE(hexToBytes(var.as_string()));
+      vo = g2::fromJacobianBytesLE(hexToBytes(var.as_string()), false, true);
   }
 
   void to_variant(const bls12_381::fp& var, fc::variant& vo, const fc::yield_function_t& yield)
   {
-      vo = bytesToHex<48>(var.toBytesBE());
+      vo = bytesToHex<48>(var.toBytesLE(true));
   }
 
   void from_variant(const fc::variant& var, bls12_381::fp& vo)
   {
-      vo = fp::fromBytesBE(hexToBytes(var.as_string()));
+      vo = fp::fromBytesLE(hexToBytes(var.as_string()), false, true);
   }
 
   void to_variant(const bls12_381::fp2& var, fc::variant& vo, const fc::yield_function_t& yield)
   {
-      vo = bytesToHex<96>(var.toBytesBE());
+      vo = bytesToHex<96>(var.toBytesLE(true));
   }
 
   void from_variant(const fc::variant& var, bls12_381::fp2& vo)
   {
-      vo = fp2::fromBytesBE(hexToBytes(var.as_string()));
+      vo = fp2::fromBytesLE(hexToBytes(var.as_string()), false, true);
   }
 
   void to_variant(const bls12_381::fp6& var, fc::variant& vo, const fc::yield_function_t& yield)
   {
-      vo = bytesToHex<288>(var.toBytesBE());
+      vo = bytesToHex<288>(var.toBytesLE(true));
   }
 
   void from_variant(const fc::variant& var, bls12_381::fp6& vo)
   {
-      vo = fp6::fromBytesBE(hexToBytes(var.as_string()));
+      vo = fp6::fromBytesLE(hexToBytes(var.as_string()), false, true);
   }
 
   void to_variant(const bls12_381::fp12& var, fc::variant& vo, const fc::yield_function_t& yield)
   {
-      vo = bytesToHex<576>(var.toBytesBE());
+      vo = bytesToHex<576>(var.toBytesLE(true));
   }
 
   void from_variant(const fc::variant& var, bls12_381::fp12& vo)
   {
-      vo = fp12::fromBytesBE(hexToBytes(var.as_string()));
+      vo = fp12::fromBytesLE(hexToBytes(var.as_string()), false, true);
   }
 }
