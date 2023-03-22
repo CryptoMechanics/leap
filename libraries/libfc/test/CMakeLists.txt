@@ -15,3 +15,8 @@ add_executable( test_filesystem test_filesystem.cpp )
 target_link_libraries( test_filesystem fc )
 
 add_test(NAME test_filesystem COMMAND test_filesystem WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+
+add_executable( test_bls crypto/test_bls.cpp )
+target_link_libraries( test_bls fc )
+
+add_test(NAME test_bls COMMAND test_bls WORKING_DIRECTORY ${CMAKE_BINARY_DIR})

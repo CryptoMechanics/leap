@@ -1785,6 +1785,79 @@ namespace webassembly {
          */
          int32_t k1_recover( span<const char> signature, span<const char> digest, span<char> pub) const;
 
+         /**
+          * Host function for G1 addition on the elliptic curve bls12-381
+          *
+          * @ingroup crypto
+          * @param op1 - a span containing the first operand G1 point.
+          * @param op2 - a span containing the second operand G1 point.
+          * @param[out] result - the result op1 + op2.
+         */
+         void bls_g1_add(span<const char> op1, span<const char> op2, span<char> result) const;
+
+         /**
+          * Host function for G2 addition on the elliptic curve bls12-381
+          *
+          * @ingroup crypto
+          * @param op1 - a span containing the first operand G2 point.
+          * @param op2 - a span containing the second operand G2 point.
+          * @param[out] result - the result op1 + op2.
+         */
+         void bls_g2_add(span<const char> op1, span<const char> op2, span<char> result) const;
+
+         /**
+          * Host function for G1 scalar multiplication on the elliptic curve bls12-381
+          *
+          * @ingroup crypto
+          * @param op1 - a span containing the G1 point operand.
+          * @param op2 - a span containing the scalar operand.
+          * @param[out] result - the result op1 * op2.
+         */
+         void bls_g1_mul(span<const char> op1, span<const char> op2, span<char> result) const;
+
+         /**
+          * Host function for G2 scalar multiplication on the elliptic curve bls12-381
+          *
+          * @ingroup crypto
+          * @param op1 - a span containing the G2 point operand.
+          * @param op2 - a span containing the scalar operand.
+          * @param[out] result - the result op1 * op2.
+         */
+         void bls_g2_mul(span<const char> op1, span<const char> op2, span<char> result) const;
+
+         /**
+          * Host function for G1 multi-exponentiation on the elliptic curve bls12-381
+          *
+          * @ingroup crypto
+          * @param points - a span containing a list of G1 points (P0, P1, P2... Pn).
+          * @param scalars - a span containing a list of scalars (s0, s1, s2... sn).
+          * @param n - the number of elements in the lists.
+          * @param[out] result - the result s0 * P0 + s1 * P1 + ... + sn * Pn.
+         */
+         void bls_g1_exp(span<const char> points, span<const char> scalars, const uint32_t n, span<char> result) const;
+
+         /**
+          * Host function for G2 multi-exponentiation on the elliptic curve bls12-381
+          *
+          * @ingroup crypto
+          * @param points - a span containing a list of G2 points (P0, P1, P2... Pn).
+          * @param scalars - a span containing a list of scalars (s0, s1, s2... sn).
+          * @param n - the number of elements in the lists.
+          * @param[out] result - the result s0 * P0 + s1 * P1 + ... + sn * Pn.
+         */
+         void bls_g2_exp(span<const char> points, span<const char> scalars, const uint32_t n, span<char> result) const;
+
+         /**
+          * Host function to calculate the pairing of (G1, G2) pairs on the elliptic curve bls12-381
+          *
+          * @ingroup crypto
+          * @param g1_points - a span containing a list of G1 points (P0, P1, P2... Pn).
+          * @param g2_points - a span containing a list of G2 points (P0, P1, P2... Pn).
+          * @param n - the number of elements in the lists.
+          * @param[out] result - the result e(g1_0, g2_0) * e(g1_1, g2_1) * ... * e(g1_n, g2_n)
+         */
+         void bls_pairing(span<const char> g1_points, span<const char> g2_points, const uint32_t n, span<char> result) const;
+
          // compiler builtins api
          void __ashlti3(legacy_ptr<int128_t>, uint64_t, uint64_t, uint32_t) const;
          void __ashrti3(legacy_ptr<int128_t>, uint64_t, uint64_t, uint32_t) const;
