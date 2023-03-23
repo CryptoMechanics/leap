@@ -22,6 +22,9 @@ namespace fc {
 
     void to_variant(const bls12_381::fp12& var, variant& vo, const fc::yield_function_t& yield = fc::yield_function_t());
     void from_variant(const variant& var, bls12_381::fp12& vo);
+
+    void to_variant(const std::array<uint64_t, 4>& var, variant& vo, const fc::yield_function_t& yield = fc::yield_function_t());
+    void from_variant(const variant& var, std::array<uint64_t, 4>& vo);
 } // namespace fc
 
 FC_REFLECT(bls12_381::g1,   (x)(y)(z) )

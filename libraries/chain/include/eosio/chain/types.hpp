@@ -80,6 +80,7 @@ namespace eosio { namespace chain {
    using private_key_type = fc::crypto::private_key;
    using signature_type   = fc::crypto::signature;
    
+   using bls_scalar_type  = std::array<uint64_t, 4>;
    using bls_g1_type      = bls12_381::g1;
    using bls_g2_type      = bls12_381::g2;
    using bls_gt_type      = bls12_381::fp12;

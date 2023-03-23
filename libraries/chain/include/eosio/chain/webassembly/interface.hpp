@@ -1809,21 +1809,21 @@ namespace webassembly {
           * Host function for G1 scalar multiplication on the elliptic curve bls12-381
           *
           * @ingroup crypto
-          * @param op1 - a span containing the G1 point operand.
-          * @param op2 - a span containing the scalar operand.
-          * @param[out] result - the result op1 * op2.
+          * @param point - a span containing the G1 point operand.
+          * @param scalar - a span containing the scalar operand.
+          * @param[out] result - the result: scalar * point.
          */
-         void bls_g1_mul(span<const char> op1, span<const char> op2, span<char> result) const;
+         void bls_g1_mul(span<const char> point, span<const char> scalar, span<char> result) const;
 
          /**
           * Host function for G2 scalar multiplication on the elliptic curve bls12-381
           *
           * @ingroup crypto
-          * @param op1 - a span containing the G2 point operand.
-          * @param op2 - a span containing the scalar operand.
+          * @param point - a span containing the G2 point operand.
+          * @param scalar - a span containing the scalar operand.
           * @param[out] result - the result op1 * op2.
          */
-         void bls_g2_mul(span<const char> op1, span<const char> op2, span<char> result) const;
+         void bls_g2_mul(span<const char> point, span<const char> scalar, span<char> result) const;
 
          /**
           * Host function for G1 multi-exponentiation on the elliptic curve bls12-381

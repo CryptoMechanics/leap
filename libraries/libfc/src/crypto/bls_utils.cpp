@@ -63,4 +63,14 @@ namespace fc {
   {
       vo = fp12::fromBytesLE(hexToBytes(var.as_string()), false, true);
   }
+
+  void to_variant(const std::array<uint64_t, 4>& var, fc::variant& vo, const fc::yield_function_t& yield)
+  {
+      vo = bytesToHex<32>(scalar::toBytesLE<4>(var));
+  }
+
+  void from_variant(const fc::variant& var, std::array<uint64_t, 4>& vo)
+  {
+      vo = scalar::fromBytesLE<4>(hexToBytes(var.as_string()));
+  }
 }
