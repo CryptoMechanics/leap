@@ -84,6 +84,8 @@ namespace eosio { namespace chain {
    using bls_g1_type      = bls12_381::g1;
    using bls_g2_type      = bls12_381::g2;
    using bls_gt_type      = bls12_381::fp12;
+   using bls_fp_type      = bls12_381::fp;
+   using bls_fp2_type     = bls12_381::fp2;
    
 #if BOOST_VERSION >= 107100
       // configurable boost deque performs much better than std::deque in our use cases

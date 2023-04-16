@@ -327,4 +327,18 @@ namespace eosio { namespace chain { namespace webassembly {
        r.toBytesLE({reinterpret_cast<uint8_t*>(result.data()), 576}, true);
    }
 
+   void interface::bls_g1_map(span<const char> e, span<char> result) const
+   {
+       bls12_381::fp a = bls12_381::fp::fromBytesLE({reinterpret_cast<const uint8_t*>(e.data()), 48}, false, true);
+       bls12_381::g1 c = bls12_381::g1::mapToCurve(a);
+       c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 144}, true);
+   }
+
+   void interface::bls_g2_map(span<const char> e, span<char> result) const
+   {
+       bls12_381::fp2 a = bls12_381::fp2::fromBytesLE({reinterpret_cast<const uint8_t*>(e.data()), 96}, false, true);
+       bls12_381::g2 c = bls12_381::g2::mapToCurve(a);
+       c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 288}, true);
+   }
+
 }}} // ns eosio::chain::webassembly

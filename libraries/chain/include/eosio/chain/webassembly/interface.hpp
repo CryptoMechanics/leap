@@ -1858,6 +1858,24 @@ namespace webassembly {
          */
          void bls_pairing(span<const char> g1_points, span<const char> g2_points, const uint32_t n, span<char> result) const;
 
+         /**
+          * Host function for mapping fp to G1 on the elliptic curve bls12-381
+          *
+          * @ingroup crypto
+          * @param e - a span containing the field element fp to be mapped.
+          * @param[out] result - the resulting element in G1.
+         */
+         void bls_g1_map(span<const char> e, span<char> result) const;
+
+         /**
+          * Host function for mapping fp2 to G2 on the elliptic curve bls12-381
+          *
+          * @ingroup crypto
+          * @param e - a span containing the field element fp2 to be mapped.
+          * @param[out] result - the resulting element in G2.
+         */
+         void bls_g2_map(span<const char> e, span<char> result) const;
+
          // compiler builtins api
          void __ashlti3(legacy_ptr<int128_t>, uint64_t, uint64_t, uint32_t) const;
          void __ashrti3(legacy_ptr<int128_t>, uint64_t, uint64_t, uint32_t) const;

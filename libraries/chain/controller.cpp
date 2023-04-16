@@ -321,6 +321,7 @@ struct controller_impl {
       set_activation_handler<builtin_protocol_feature_t::get_block_num>();
       set_activation_handler<builtin_protocol_feature_t::crypto_primitives>();
       set_activation_handler<builtin_protocol_feature_t::bls_primitives>();
+      bls12_381::init();
 
       self.irreversible_block.connect([this](const block_state_ptr& bsp) {
          wasmif.current_lib(bsp->block_num);
@@ -3717,6 +3718,8 @@ void controller_impl::on_activation<builtin_protocol_feature_t::bls_primitives>(
       add_intrinsic_to_whitelist( ps.whitelisted_intrinsics, "bls_g1_exp" );
       add_intrinsic_to_whitelist( ps.whitelisted_intrinsics, "bls_g2_exp" );
       add_intrinsic_to_whitelist( ps.whitelisted_intrinsics, "bls_pairing" );
+      add_intrinsic_to_whitelist( ps.whitelisted_intrinsics, "bls_g1_map" );
+      add_intrinsic_to_whitelist( ps.whitelisted_intrinsics, "bls_g2_map" );
    } );
 }
 

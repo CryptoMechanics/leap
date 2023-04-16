@@ -637,6 +637,8 @@ REGISTER_CF_HOST_FUNCTION( bls_g2_mul );
 REGISTER_CF_HOST_FUNCTION( bls_g1_exp );
 REGISTER_CF_HOST_FUNCTION( bls_g2_exp );
 REGISTER_CF_HOST_FUNCTION( bls_pairing );
+REGISTER_CF_HOST_FUNCTION( bls_g1_map );
+REGISTER_CF_HOST_FUNCTION( bls_g2_map );
 
 } // namespace webassembly
 } // namespace chain
