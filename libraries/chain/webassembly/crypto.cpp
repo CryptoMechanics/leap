@@ -341,4 +341,11 @@ namespace eosio { namespace chain { namespace webassembly {
        c.toJacobianBytesLE({reinterpret_cast<uint8_t*>(result.data()), 288}, true);
    }
 
+   void interface::bls_fp_mod(span<const char> s, span<char> result) const
+   {
+       std::array<uint64_t, 8> k = bls12_381::scalar::fromBytesLE<8>({reinterpret_cast<const uint8_t*>(s.data()), 64});
+       bls12_381::fp e = bls12_381::fp::modPrime<8>(k);
+       e.toBytesLE({reinterpret_cast<uint8_t*>(result.data()), 48}, true);
+   }
+
 }}} // ns eosio::chain::webassembly

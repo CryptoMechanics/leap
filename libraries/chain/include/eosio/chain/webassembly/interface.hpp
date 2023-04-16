@@ -1876,6 +1876,16 @@ namespace webassembly {
          */
          void bls_g2_map(span<const char> e, span<char> result) const;
 
+         /**
+          * Host function for modular reduction of 64 bit scalar to field element (fp) of the elliptic curve bls12-381
+          * Involves Montgomery Reduction on the resulting field element.
+          *
+          * @ingroup crypto
+          * @param s - a span containing the 64 Bit scalar to be reduced.
+          * @param[out] result - the resulting field element fp in Montogomery form.
+         */
+         void bls_fp_mod(span<const char> s, span<char> result) const;
+
          // compiler builtins api
          void __ashlti3(legacy_ptr<int128_t>, uint64_t, uint64_t, uint32_t) const;
          void __ashrti3(legacy_ptr<int128_t>, uint64_t, uint64_t, uint32_t) const;
